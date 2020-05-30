@@ -187,20 +187,21 @@ definitions:
         properties:
           $oid:
             type: string
-        example:
-          - 5ed2882a10ab722e54e07f7f
+            example: 5ed2882a10ab722e54e07f7f
       director:
         type: array
         items:
           type: string        
         example:
           - John Lasseter
+          - John Lasseter2
       writers:
         type: array
         items:
           type: string
         example:
-          - [John Lasseter]
+          - John Lasseter
+          - John Lasseter2
       awards:
         type: object
         properties:
@@ -273,8 +274,8 @@ definitions:
         type: array
         items:
           type: string
-          example:
-          - USA
+        example:
+        - USA
       metacritic:
         type: integer
       type:
@@ -286,13 +287,15 @@ definitions:
         items:
           type: string
         example:
-          - [Adventure, Drama]
+          - Adventure
+          - Drama
       actors:
         type: array
         items:
           type: string
-          example:
-          - [Tom Hanks,Jan Kowalski]
+        example:
+        - Tom Hanks
+        - Jan Kowalski
       plot:
         type: string
     # Added by API Auto Mocking Plugin

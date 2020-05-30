@@ -243,24 +243,20 @@ func init() {
           "type": "object",
           "properties": {
             "$oid": {
-              "type": "string"
+              "type": "string",
+              "example": "5ed2882a10ab722e54e07f7f"
             }
-          },
-          "example": [
-            "5ed2882a10ab722e54e07f7f"
-          ]
+          }
         },
         "actors": {
           "type": "array",
           "items": {
-            "type": "string",
-            "example": [
-              [
-                "Tom Hanks",
-                "Jan Kowalski"
-              ]
-            ]
-          }
+            "type": "string"
+          },
+          "example": [
+            "Tom Hanks",
+            "Jan Kowalski"
+          ]
         },
         "awards": {
           "type": "object",
@@ -279,11 +275,11 @@ func init() {
         "countries": {
           "type": "array",
           "items": {
-            "type": "string",
-            "example": [
-              "USA"
-            ]
-          }
+            "type": "string"
+          },
+          "example": [
+            "USA"
+          ]
         },
         "director": {
           "type": "array",
@@ -291,7 +287,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            "John Lasseter"
+            "John Lasseter",
+            "John Lasseter2"
           ]
         },
         "genres": {
@@ -300,10 +297,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            [
-              "Adventure",
-              "Drama"
-            ]
+            "Adventure",
+            "Drama"
           ]
         },
         "imdb": {
@@ -412,9 +407,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            [
-              "John Lasseter"
-            ]
+            "John Lasseter",
+            "John Lasseter2"
           ]
         },
         "year": {
@@ -719,12 +713,10 @@ func init() {
       "type": "object",
       "properties": {
         "$oid": {
-          "type": "string"
+          "type": "string",
+          "example": "5ed2882a10ab722e54e07f7f"
         }
-      },
-      "example": [
-        "5ed2882a10ab722e54e07f7f"
-      ]
+      }
     },
     "MovieImdb": {
       "type": "object",
@@ -817,24 +809,20 @@ func init() {
           "type": "object",
           "properties": {
             "$oid": {
-              "type": "string"
+              "type": "string",
+              "example": "5ed2882a10ab722e54e07f7f"
             }
-          },
-          "example": [
-            "5ed2882a10ab722e54e07f7f"
-          ]
+          }
         },
         "actors": {
           "type": "array",
           "items": {
-            "type": "string",
-            "example": [
-              [
-                "Tom Hanks",
-                "Jan Kowalski"
-              ]
-            ]
-          }
+            "type": "string"
+          },
+          "example": [
+            "Tom Hanks",
+            "Jan Kowalski"
+          ]
         },
         "awards": {
           "type": "object",
@@ -853,11 +841,11 @@ func init() {
         "countries": {
           "type": "array",
           "items": {
-            "type": "string",
-            "example": [
-              "USA"
-            ]
-          }
+            "type": "string"
+          },
+          "example": [
+            "USA"
+          ]
         },
         "director": {
           "type": "array",
@@ -865,7 +853,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            "John Lasseter"
+            "John Lasseter",
+            "John Lasseter2"
           ]
         },
         "genres": {
@@ -874,10 +863,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            [
-              "Adventure",
-              "Drama"
-            ]
+            "Adventure",
+            "Drama"
           ]
         },
         "imdb": {
@@ -967,9 +954,8 @@ func init() {
             "type": "string"
           },
           "example": [
-            [
-              "John Lasseter"
-            ]
+            "John Lasseter",
+            "John Lasseter2"
           ]
         },
         "year": {
