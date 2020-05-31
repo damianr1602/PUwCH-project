@@ -157,7 +157,6 @@ paths:
             $ref: "#/definitions/movie"
         404:
           $ref: "#/responses/NotFound"
-
 responses:
   NotFound:
     description: The specified resource was not found
@@ -173,7 +172,8 @@ definitions:
     type: object
     properties:
       code:
-        type: string
+        type: integer
+        format: int64
       message:
         type: string
     required:
@@ -183,18 +183,13 @@ definitions:
     type: object
     properties:
       _id:
-        type: object
-        properties:
-          $oid:
-            type: string
-            example: 5ed2882a10ab722e54e07f7f
+          type: string
+          example: 5ed2882a10ab722e54e07f7f
+          x-go-custom-tag: "bson:\"_id\""
       director:
-        type: array
-        items:
-          type: string        
+        type: string
         example:
           - John Lasseter
-          - John Lasseter2
       writers:
         type: array
         items:
@@ -211,6 +206,8 @@ definitions:
             type: string
           wins:
             type: integer
+        x-go-custom-tag: "bson:\"awards\""
+        
       reviews:
         type: array
         items:
@@ -219,21 +216,17 @@ definitions:
             name:
               type: string
             rating:
-              type: integer
+              type: number
             comment:
               type: string
             date:
-              type: object
-              properties:
-                $date:
-                  type: string
+              type: string
+              format: date-time 
       year:
         type: integer
       released:
-        type: object
-        properties:
-          $date:
-            type: string
+        type: string
+        format: date-time 
       runtime:
         type: integer
       poster:
@@ -244,7 +237,7 @@ definitions:
           id:
             type: string
           rating:
-            type: integer
+            type: number
           votes:
             type: integer
       tomato:
@@ -257,11 +250,11 @@ definitions:
           meter:
             type: integer
           rating:
-            type: integer
+            type: number
           userMeter:
             type: integer
           userRating:
-            type: integer
+            type: number
           userReviews:
             type: integer
           image:
@@ -300,7 +293,7 @@ definitions:
         type: string
     # Added by API Auto Mocking Plugin
 
-host: virtserver.swaggerhub.com
-basePath: /damianr1602/chmury/1.0.0
+# basePath: /damianr1602/chmury/1.0.0
 schemes:
+  - http
   - https

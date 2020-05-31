@@ -12,17 +12,17 @@ validate:
 # is valid.
 # 
 # Here we're specifying some flags:
-# --target              the base directory for generating the files;
+# --target              the base directory for generating the files;w
 # --spec                path to the swagger specification;
 # --exclude-main        generates only the library code and not a 
 #                       sample CLI application;
 # --name                the name of the application.
 gen: validate
 	swagger generate server \
-		--target=./swagger \
+		--target=./gen \
 		--spec=./swagger/swagger.yml \
 		--exclude-main \
-		--name=chmuryrest
+		--name=movies
 
 
 # just added `gen` and `validate`
