@@ -18,8 +18,6 @@ import (
 	"github.com/go-openapi/spec"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	"github.com/damianr1602/chmuryrest/gen/restapi/operations/api_users"
 )
 
 // NewMoviesAPI creates a new Movies instance
@@ -42,25 +40,21 @@ func NewMoviesAPI(spec *loads.Document) *MoviesAPI {
 		JSONConsumer: runtime.JSONConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),
-		TxtProducer:  runtime.TextProducer(),
 
-		APIUsersAllMoviesHandler: api_users.AllMoviesHandlerFunc(func(params api_users.AllMoviesParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.AllMovies has not yet been implemented")
+		AllMoviesHandler: AllMoviesHandlerFunc(func(params AllMoviesParams) middleware.Responder {
+			return middleware.NotImplemented("operation AllMovies has not yet been implemented")
 		}),
-		APIUsersCreateMovieHandler: api_users.CreateMovieHandlerFunc(func(params api_users.CreateMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.CreateMovie has not yet been implemented")
+		CreateMovieHandler: CreateMovieHandlerFunc(func(params CreateMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation CreateMovie has not yet been implemented")
 		}),
-		APIUsersDeleteMovieHandler: api_users.DeleteMovieHandlerFunc(func(params api_users.DeleteMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.DeleteMovie has not yet been implemented")
+		DeleteMovieHandler: DeleteMovieHandlerFunc(func(params DeleteMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation DeleteMovie has not yet been implemented")
 		}),
-		APIUsersFindMovieHandler: api_users.FindMovieHandlerFunc(func(params api_users.FindMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.FindMovie has not yet been implemented")
+		FindMovieHandler: FindMovieHandlerFunc(func(params FindMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation FindMovie has not yet been implemented")
 		}),
-		APIUsersUpdateMovieHandler: api_users.UpdateMovieHandlerFunc(func(params api_users.UpdateMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.UpdateMovie has not yet been implemented")
-		}),
-		GetVersionHandler: GetVersionHandlerFunc(func(params GetVersionParams) middleware.Responder {
-			return middleware.NotImplemented("operation GetVersion has not yet been implemented")
+		UpdateMovieHandler: UpdateMovieHandlerFunc(func(params UpdateMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation UpdateMovie has not yet been implemented")
 		}),
 	}
 }
@@ -94,22 +88,17 @@ type MoviesAPI struct {
 	// JSONProducer registers a producer for the following mime types:
 	//   - application/json
 	JSONProducer runtime.Producer
-	// TxtProducer registers a producer for the following mime types:
-	//   - text/plain
-	TxtProducer runtime.Producer
 
-	// APIUsersAllMoviesHandler sets the operation handler for the all movies operation
-	APIUsersAllMoviesHandler api_users.AllMoviesHandler
-	// APIUsersCreateMovieHandler sets the operation handler for the create movie operation
-	APIUsersCreateMovieHandler api_users.CreateMovieHandler
-	// APIUsersDeleteMovieHandler sets the operation handler for the delete movie operation
-	APIUsersDeleteMovieHandler api_users.DeleteMovieHandler
-	// APIUsersFindMovieHandler sets the operation handler for the find movie operation
-	APIUsersFindMovieHandler api_users.FindMovieHandler
-	// APIUsersUpdateMovieHandler sets the operation handler for the update movie operation
-	APIUsersUpdateMovieHandler api_users.UpdateMovieHandler
-	// GetVersionHandler sets the operation handler for the get version operation
-	GetVersionHandler GetVersionHandler
+	// AllMoviesHandler sets the operation handler for the all movies operation
+	AllMoviesHandler AllMoviesHandler
+	// CreateMovieHandler sets the operation handler for the create movie operation
+	CreateMovieHandler CreateMovieHandler
+	// DeleteMovieHandler sets the operation handler for the delete movie operation
+	DeleteMovieHandler DeleteMovieHandler
+	// FindMovieHandler sets the operation handler for the find movie operation
+	FindMovieHandler FindMovieHandler
+	// UpdateMovieHandler sets the operation handler for the update movie operation
+	UpdateMovieHandler UpdateMovieHandler
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
 	ServeError func(http.ResponseWriter, *http.Request, error)
@@ -175,27 +164,21 @@ func (o *MoviesAPI) Validate() error {
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
 	}
-	if o.TxtProducer == nil {
-		unregistered = append(unregistered, "TxtProducer")
-	}
 
-	if o.APIUsersAllMoviesHandler == nil {
-		unregistered = append(unregistered, "api_users.AllMoviesHandler")
+	if o.AllMoviesHandler == nil {
+		unregistered = append(unregistered, "AllMoviesHandler")
 	}
-	if o.APIUsersCreateMovieHandler == nil {
-		unregistered = append(unregistered, "api_users.CreateMovieHandler")
+	if o.CreateMovieHandler == nil {
+		unregistered = append(unregistered, "CreateMovieHandler")
 	}
-	if o.APIUsersDeleteMovieHandler == nil {
-		unregistered = append(unregistered, "api_users.DeleteMovieHandler")
+	if o.DeleteMovieHandler == nil {
+		unregistered = append(unregistered, "DeleteMovieHandler")
 	}
-	if o.APIUsersFindMovieHandler == nil {
-		unregistered = append(unregistered, "api_users.FindMovieHandler")
+	if o.FindMovieHandler == nil {
+		unregistered = append(unregistered, "FindMovieHandler")
 	}
-	if o.APIUsersUpdateMovieHandler == nil {
-		unregistered = append(unregistered, "api_users.UpdateMovieHandler")
-	}
-	if o.GetVersionHandler == nil {
-		unregistered = append(unregistered, "GetVersionHandler")
+	if o.UpdateMovieHandler == nil {
+		unregistered = append(unregistered, "UpdateMovieHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -245,8 +228,6 @@ func (o *MoviesAPI) ProducersFor(mediaTypes []string) map[string]runtime.Produce
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONProducer
-		case "text/plain":
-			result["text/plain"] = o.TxtProducer
 		}
 
 		if p, ok := o.customProducers[mt]; ok {
@@ -290,27 +271,23 @@ func (o *MoviesAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/movies"] = api_users.NewAllMovies(o.context, o.APIUsersAllMoviesHandler)
+	o.handlers["GET"]["/movies"] = NewAllMovies(o.context, o.AllMoviesHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/movies"] = api_users.NewCreateMovie(o.context, o.APIUsersCreateMovieHandler)
+	o.handlers["POST"]["/movies"] = NewCreateMovie(o.context, o.CreateMovieHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
-	o.handlers["DELETE"]["/movies"] = api_users.NewDeleteMovie(o.context, o.APIUsersDeleteMovieHandler)
+	o.handlers["DELETE"]["/movies"] = NewDeleteMovie(o.context, o.DeleteMovieHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/movies/{id}"] = api_users.NewFindMovie(o.context, o.APIUsersFindMovieHandler)
+	o.handlers["GET"]["/movies/{id}"] = NewFindMovie(o.context, o.FindMovieHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
-	o.handlers["PUT"]["/movies"] = api_users.NewUpdateMovie(o.context, o.APIUsersUpdateMovieHandler)
-	if o.handlers["GET"] == nil {
-		o.handlers["GET"] = make(map[string]http.Handler)
-	}
-	o.handlers["GET"]["/version"] = NewGetVersion(o.context, o.GetVersionHandler)
+	o.handlers["PUT"]["/movies"] = NewUpdateMovie(o.context, o.UpdateMovieHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

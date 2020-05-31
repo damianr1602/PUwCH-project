@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 
 	"github.com/damianr1602/chmuryrest/gen/restapi/operations"
-	"github.com/damianr1602/chmuryrest/gen/restapi/operations/api_users"
 )
 
 //go:generate swagger generate server --target ../../gen --name Movies --spec ../../swagger/swagger.yml --exclude-main
@@ -19,6 +18,8 @@ import (
 func configureFlags(api *operations.MoviesAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
 }
+
+
 
 func configureAPI(api *operations.MoviesAPI) http.Handler {
 	// configure the api here
@@ -33,36 +34,30 @@ func configureAPI(api *operations.MoviesAPI) http.Handler {
 	api.JSONConsumer = runtime.JSONConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()
-	api.TxtProducer = runtime.TextProducer()
 
-	if api.APIUsersAllMoviesHandler == nil {
-		api.APIUsersAllMoviesHandler = api_users.AllMoviesHandlerFunc(func(params api_users.AllMoviesParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.AllMovies has not yet been implemented")
+	if api.AllMoviesHandler == nil {
+		api.AllMoviesHandler = operations.AllMoviesHandlerFunc(func(params operations.AllMoviesParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.AllMovies has not yet been implemented")
 		})
 	}
-	if api.APIUsersCreateMovieHandler == nil {
-		api.APIUsersCreateMovieHandler = api_users.CreateMovieHandlerFunc(func(params api_users.CreateMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.CreateMovie has not yet been implemented")
+	if api.CreateMovieHandler == nil {
+		api.CreateMovieHandler = operations.CreateMovieHandlerFunc(func(params operations.CreateMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.CreateMovie has not yet been implemented")
 		})
 	}
-	if api.APIUsersDeleteMovieHandler == nil {
-		api.APIUsersDeleteMovieHandler = api_users.DeleteMovieHandlerFunc(func(params api_users.DeleteMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.DeleteMovie has not yet been implemented")
+	if api.DeleteMovieHandler == nil {
+		api.DeleteMovieHandler = operations.DeleteMovieHandlerFunc(func(params operations.DeleteMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.DeleteMovie has not yet been implemented")
 		})
 	}
-	if api.APIUsersFindMovieHandler == nil {
-		api.APIUsersFindMovieHandler = api_users.FindMovieHandlerFunc(func(params api_users.FindMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.FindMovie has not yet been implemented")
+	if api.FindMovieHandler == nil {
+		api.FindMovieHandler = operations.FindMovieHandlerFunc(func(params operations.FindMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.FindMovie has not yet been implemented")
 		})
 	}
-	if api.APIUsersUpdateMovieHandler == nil {
-		api.APIUsersUpdateMovieHandler = api_users.UpdateMovieHandlerFunc(func(params api_users.UpdateMovieParams) middleware.Responder {
-			return middleware.NotImplemented("operation api_users.UpdateMovie has not yet been implemented")
-		})
-	}
-	if api.GetVersionHandler == nil {
-		api.GetVersionHandler = operations.GetVersionHandlerFunc(func(params operations.GetVersionParams) middleware.Responder {
-			return middleware.NotImplemented("operation operations.GetVersion has not yet been implemented")
+	if api.UpdateMovieHandler == nil {
+		api.UpdateMovieHandler = operations.UpdateMovieHandlerFunc(func(params operations.UpdateMovieParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.UpdateMovie has not yet been implemented")
 		})
 	}
 

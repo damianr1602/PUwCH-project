@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 
+	logger "github.com/damianr1602/chmuryrest/logging"
+
 	. "github.com/damianr1602/chmuryrest/gen/models"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -18,7 +20,7 @@ type MoviesDAO struct {
 }
 
 var db *mongo.Database
-var ctx context.Context = context.Background()
+var ctx context.Context = context.TODO()
 
 // mongo collection
 const (
@@ -27,18 +29,28 @@ const (
 
 // Connect Establish a connection to database
 func (m *MoviesDAO) Connect() {
-	ctx := context.TODO()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(m.Server))
 	if err != nil {
 		panic(err)
 	}
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 	db = client.Database(m.Database)
+
 }
 
 // FindAll find list of movies
-func (m *MoviesDAO) FindAll() ([]Movie, error) {
-	var movies []Movie
-	cur, err := db.Collection(COLLECTION).Find(ctx, bson.D{{}})
+func (m *MoviesDAO) FindAll(since int32, limit int32) ([]*Movie, error) {
+	findOptions := options.Find()
+	findOptions.SetLimit(int64(limit))
+	findOptions.SetSkip(int64(since))
+	res, _ := db.ListCollectionNames(ctx, bson.D{{}})
+	logger.Log.Println("FindAll findOptions: ", res)
+
+	var movies []*Movie
+	cur, err := db.Collection(COLLECTION).Find(ctx, bson.D{{}}, findOptions)
 	for cur.Next(context.TODO()) {
 		// create a value into which the single document can be decoded
 		var movie Movie
@@ -46,20 +58,21 @@ func (m *MoviesDAO) FindAll() ([]Movie, error) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		movies = append(movies, movie)
+		movies = append(movies, &movie)
 	}
 
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
+	logger.Log.Println("TEST-dao", movies)
 
 	// Close the cursor once finished
 	cur.Close(ctx)
 	return movies, err
 }
 
-// FindByID find a movie by its id
-func (m *MoviesDAO) FindByID(id string) (Movie, error) {
+// FindbyID find a movie by its id
+func (m *MoviesDAO) FindbyID(id string) (Movie, error) {
 	var movie Movie
 	objID, _ := primitive.ObjectIDFromHex(id)
 	err := db.Collection(COLLECTION).FindOne(ctx, bson.D{{"_id", objID}}).Decode(&movie)
@@ -89,18 +102,27 @@ func (m *MoviesDAO) Update(movie Movie) error {
 }
 
 // func main() {
+
 // 	dao := MoviesDAO{}
 // 	dao.Server = "mongodb://localhost:27017"
 // 	dao.Database = "chmury"
-// 	dao.Connect()
+// 	logger.Log.Println("FindAll findOptions: ", dao.Server, dao.Database)
+// 	conf.Read()
+// 	// dao.Server = conf.Server
+// 	// dao.Database = conf.Database
+// 	// logger.Log.Println("FindAll findOptions: ", dao.Server, dao.Database)
 
-// 	movie, _ := dao.FindByID("5ed2882a10ab722e54e07f1b")
-// 	error := dao.Delete(movie)
-// 	fmt.Println(error)
-// 	byt, _ := movie.MarshalBinary()
+// 	dao.Connect()
+// 	res, _ := db.ListCollectionNames(context.TODO(), bson.D{{}})
+
+// 	logger.Log.Println("FindAll findOptions: ", res)
+// 	movie, _ := dao.FindAll(0, 2)
 
 // 	var out bytes.Buffer
-// 	json.Indent(&out, byt, "", "\t")
-// 	out.WriteTo(os.Stdout)
+// 	for _, m := range movie {
+// 		byt, _ := m.MarshalBinary()
 
+// 		json.Indent(&out, byt, "", "\t")
+// 		out.WriteTo(os.Stdout)
+// 	}
 // }

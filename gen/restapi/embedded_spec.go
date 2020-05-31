@@ -42,9 +42,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Show movies",
         "operationId": "AllMovies",
         "parameters": [
@@ -93,9 +90,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Update existing movie",
         "operationId": "UpdateMovie",
         "parameters": [
@@ -130,9 +124,6 @@ func init() {
         ],
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "apiUsers"
         ],
         "summary": "adds a movie",
         "operationId": "CreateMovie",
@@ -169,9 +160,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Delete existing movie",
         "operationId": "DeleteMovie",
         "parameters": [
@@ -206,9 +194,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Search best result matching criteria",
         "operationId": "FindMovie",
         "parameters": [
@@ -229,29 +214,6 @@ func init() {
           },
           "404": {
             "$ref": "#/responses/NotFound"
-          }
-        }
-      }
-    },
-    "/version": {
-      "get": {
-        "produces": [
-          "text/plain"
-        ],
-        "operationId": "getVersion",
-        "responses": {
-          "200": {
-            "description": "returns the current version",
-            "schema": {
-              "description": "api currnet version",
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "error",
-            "schema": {
-              "$ref": "#/definitions/result"
-            }
           }
         }
       }
@@ -486,9 +448,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Show movies",
         "operationId": "AllMovies",
         "parameters": [
@@ -542,9 +501,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Update existing movie",
         "operationId": "UpdateMovie",
         "parameters": [
@@ -586,9 +542,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "adds a movie",
         "operationId": "CreateMovie",
         "parameters": [
@@ -626,9 +579,6 @@ func init() {
         ],
         "produces": [
           "application/json"
-        ],
-        "tags": [
-          "apiUsers"
         ],
         "summary": "Delete existing movie",
         "operationId": "DeleteMovie",
@@ -670,9 +620,6 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "apiUsers"
-        ],
         "summary": "Search best result matching criteria",
         "operationId": "FindMovie",
         "parameters": [
@@ -693,29 +640,6 @@ func init() {
           },
           "404": {
             "description": "The specified resource was not found",
-            "schema": {
-              "$ref": "#/definitions/result"
-            }
-          }
-        }
-      }
-    },
-    "/version": {
-      "get": {
-        "produces": [
-          "text/plain"
-        ],
-        "operationId": "getVersion",
-        "responses": {
-          "200": {
-            "description": "returns the current version",
-            "schema": {
-              "description": "api currnet version",
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "error",
             "schema": {
               "$ref": "#/definitions/result"
             }

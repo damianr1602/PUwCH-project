@@ -11,15 +11,15 @@ import (
 	golangswaggerpaths "path"
 )
 
-// GetVersionURL generates an URL for the get version operation
-type GetVersionURL struct {
+// UpdateMovieURL generates an URL for the update movie operation
+type UpdateMovieURL struct {
 	_basePath string
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetVersionURL) WithBasePath(bp string) *GetVersionURL {
+func (o *UpdateMovieURL) WithBasePath(bp string) *UpdateMovieURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -27,15 +27,15 @@ func (o *GetVersionURL) WithBasePath(bp string) *GetVersionURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *GetVersionURL) SetBasePath(bp string) {
+func (o *UpdateMovieURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *GetVersionURL) Build() (*url.URL, error) {
+func (o *UpdateMovieURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/version"
+	var _path = "/movies"
 
 	_basePath := o._basePath
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
@@ -44,7 +44,7 @@ func (o *GetVersionURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *GetVersionURL) Must(u *url.URL, err error) *url.URL {
+func (o *UpdateMovieURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -55,17 +55,17 @@ func (o *GetVersionURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *GetVersionURL) String() string {
+func (o *UpdateMovieURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *GetVersionURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *UpdateMovieURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on GetVersionURL")
+		return nil, errors.New("scheme is required for a full url on UpdateMovieURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on GetVersionURL")
+		return nil, errors.New("host is required for a full url on UpdateMovieURL")
 	}
 
 	base, err := o.Build()
@@ -79,6 +79,6 @@ func (o *GetVersionURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *GetVersionURL) StringFull(scheme, host string) string {
+func (o *UpdateMovieURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

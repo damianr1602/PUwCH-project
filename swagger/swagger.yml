@@ -20,8 +20,8 @@ tags:
 paths:
   /movies:
     get:
-      tags:
-        - apiUsers
+      # tags:
+      #   - apiUsers
       summary: Show movies
       operationId: AllMovies
       description: |
@@ -58,8 +58,8 @@ paths:
         404:
           $ref: "#/responses/NotFound"
     post:
-      tags:
-        - apiUsers
+      # tags:
+      #   - apiUsers
       summary: adds a movie
       operationId: CreateMovie
       description: Adds a movie to the system
@@ -82,9 +82,13 @@ paths:
           $ref: "#/responses/Unauthorized"
         409:
           description: an existing item already exists
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/result"          
     put:
-      tags:
-        - apiUsers
+      # tags:
+      #   - apiUsers
       summary: Update existing movie
       operationId: UpdateMovie
       description: Update existing movie
@@ -107,9 +111,13 @@ paths:
           $ref: "#/responses/Unauthorized"
         404:
           $ref: "#/responses/NotFound"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/result"          
     delete:
-      tags:
-        - apiUsers
+      # tags:
+      #   - apiUsers
       summary: Delete existing movie
       operationId: DeleteMovie
       description: Delete existing movie
@@ -132,11 +140,15 @@ paths:
           $ref: "#/responses/Unauthorized"
         404:
           $ref: "#/responses/NotFound"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/result"
 
   /movies/{id}:
     get:
-      tags:
-        - apiUsers
+      # tags:
+      #   - apiUsers
       summary: Search best result matching criteria
       operationId: FindMovie
       description: |
@@ -157,6 +169,10 @@ paths:
             $ref: "#/definitions/movie"
         404:
           $ref: "#/responses/NotFound"
+        default:
+          description: generic error response
+          schema:
+            $ref: "#/definitions/result"          
 responses:
   NotFound:
     description: The specified resource was not found
