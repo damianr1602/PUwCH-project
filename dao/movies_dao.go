@@ -100,29 +100,3 @@ func (m *MoviesDAO) Update(movie Movie) error {
 	_, err := db.Collection(COLLECTION).UpdateOne(ctx, bson.M{"_id": objID}, &movie)
 	return err
 }
-
-// func main() {
-
-// 	dao := MoviesDAO{}
-// 	dao.Server = "mongodb://localhost:27017"
-// 	dao.Database = "chmury"
-// 	logger.Log.Println("FindAll findOptions: ", dao.Server, dao.Database)
-// 	conf.Read()
-// 	// dao.Server = conf.Server
-// 	// dao.Database = conf.Database
-// 	// logger.Log.Println("FindAll findOptions: ", dao.Server, dao.Database)
-
-// 	dao.Connect()
-// 	res, _ := db.ListCollectionNames(context.TODO(), bson.D{{}})
-
-// 	logger.Log.Println("FindAll findOptions: ", res)
-// 	movie, _ := dao.FindAll(0, 2)
-
-// 	var out bytes.Buffer
-// 	for _, m := range movie {
-// 		byt, _ := m.MarshalBinary()
-
-// 		json.Indent(&out, byt, "", "\t")
-// 		out.WriteTo(os.Stdout)
-// 	}
-// }

@@ -1,12 +1,10 @@
 package main
 
 import (
-	"context"
 	"log"
 	"os"
 
 	"github.com/damianr1602/chmuryrest/gen/models"
-	"go.mongodb.org/mongo-driver/bson"
 
 	. "github.com/damianr1602/chmuryrest/config"
 	. "github.com/damianr1602/chmuryrest/dao"
@@ -64,10 +62,6 @@ func init() {
 	dao.Database = conf.Database
 }
 
-// main parses the arguments from the CLI as specified
-// by our configuration described in `cliArgs` and then
-// populates the `args` reference we defined in the `vars`
-// section above.
 func main() {
 	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
 	if err != nil {
@@ -104,8 +98,6 @@ func main() {
 
 	server.ConfigureAPI()
 
-	// Start listening using having the handlers and port
-	// already set up.
 	if err := server.Serve(); err != nil {
 		log.Fatalln(err)
 	}
